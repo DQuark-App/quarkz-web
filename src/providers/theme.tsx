@@ -8,7 +8,7 @@ export default function QuarkThemeProvider({
 	children: React.ReactNode
 }) {
 	return (
-		<ThemeProvider theme={getTheme('light', null)}>
+		<ThemeProvider theme={getTheme('light')}>
 			<CssBaseline />
 			{children}
 		</ThemeProvider>
