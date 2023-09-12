@@ -11,8 +11,9 @@ import {
 	useTheme,
 } from '@mui/material'
 import { useState } from 'react'
-import pages from '@/data/nav'
+import { pages } from '@/data/nav'
 import Footer from './footer'
+import { useDQuarkUser } from '@/providers/firebase'
 
 export default function MainLayout({
 	children,
@@ -27,8 +28,8 @@ export default function MainLayout({
 	const isMd = useMediaQuery(theme.breakpoints.up('md'), {
 		defaultMatches: true,
 	})
-
 	const [openSidebar, setOpenSidebar] = useState(false)
+	const user = useDQuarkUser()
 
 	const handleSidebarOpen = () => {
 		setOpenSidebar(true)
@@ -57,6 +58,7 @@ export default function MainLayout({
 			>
 				<Container>
 					<Topbar
+						pages={pages}
 						onSidebarOpen={handleSidebarOpen}
 						colorInvert={trigger ? false : colorInvert}
 					/>

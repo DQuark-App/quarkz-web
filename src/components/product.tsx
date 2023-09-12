@@ -105,7 +105,7 @@ const Product = () => {
 
 	return (
 		<Box>
-			<Box marginBottom={4}>
+			<Box marginY={4}>
 				<Typography
 					sx={{
 						textTransform: 'uppercase',
@@ -137,8 +137,8 @@ const Product = () => {
 					Our products and services are designed to help you integrate your web
 					3.0 app.
 					<br />
-					We help you to integrate with web 2.0 providers including mobile
-					push notifications , email, on ramp and many others.
+					We help you to integrate with web 2.0 providers including mobile push
+					notifications , email, on ramp and many others.
 				</Typography>
 			</Box>
 			<Grid container spacing={4}>

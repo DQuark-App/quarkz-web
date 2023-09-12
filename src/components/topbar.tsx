@@ -8,18 +8,12 @@ import { alpha, useTheme } from '@mui/material/styles'
 import MenuIcon from '@mui/icons-material/Menu'
 import NavItem from './navitem'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 
-const Topbar = ({ onSidebarOpen, pages, colorInvert = false }: any) => {
+const Topbar = ({ onSidebarOpen, pages = [], colorInvert = false }: any) => {
 	const theme = useTheme()
+	const router = useRouter()
 	const { mode } = theme.palette
-	// const {
-	// 	landings: landingPages,
-	// 	secondary: secondaryPages,
-	// 	company: companyPages,
-	// 	account: accountPages,
-	// 	portfolio: portfolioPages,
-	// 	blog: blogPages,
-	// } = pages
 
 	return (
 		<Box
@@ -36,23 +30,27 @@ const Topbar = ({ onSidebarOpen, pages, colorInvert = false }: any) => {
 				width={{ xs: 100, md: 120 }}
 			>
 				<Image
-					src={
-						mode === 'light' && !colorInvert
-							? '/logo-black.png'
-							: '/logo-white.png'
-					}
+					src={'/logo-no-background.png'}
 					width={180}
 					height={60}
 					alt={''}
 				/>
 			</Box>
 			<Box sx={{ display: { xs: 'none', md: 'flex' } }} alignItems={'center'}>
-				<Box>
-					<NavItem title={'Home'} id={'home'} colorInvert={colorInvert} />
-				</Box>
-				<Box marginLeft={4}>
-					<NavItem title={'Sign In'} id={'signin'} colorInvert={colorInvert} />
-				</Box>
+				{pages.map((page: any, index: number) => {
+					return (
+						<Box key={index.toString()} marginX={2}>
+							<NavItem
+								onClick={() => {
+									router.push(page.href)
+								}}
+								title={page.title}
+								id={`nav-${index}`}
+								colorInvert={colorInvert}
+							/>
+						</Box>
+					)
+				})}
 			</Box>
 			<Box sx={{ display: { xs: 'block', md: 'none' } }} alignItems={'center'}>
 				<Button
@@ -75,7 +73,7 @@ const Topbar = ({ onSidebarOpen, pages, colorInvert = false }: any) => {
 
 Topbar.propTypes = {
 	onSidebarOpen: PropTypes.func,
-	pages: PropTypes.object,
+	pages: PropTypes.array,
 	colorInvert: PropTypes.bool,
 }
 

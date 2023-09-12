@@ -3,22 +3,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
 import { useTheme } from '@mui/material/styles'
 import NavItem from './navitem'
+import { useRouter } from 'next/navigation'
 
 const SidebarNav = ({ pages }: any) => {
 	const theme = useTheme()
+	const router = useRouter()
 	const { mode } = theme.palette
-
-	const {
-		landings: landingPages,
-		secondary: secondaryPages,
-		company: companyPages,
-		account: accountPages,
-		portfolio: portfolioPages,
-		blog: blogPages,
-	} = pages
 
 	return (
 		<Box>
@@ -43,31 +35,28 @@ const SidebarNav = ({ pages }: any) => {
 				</Box>
 			</Box>
 			<Box paddingX={2} paddingY={2}>
-				<Box>
-					<NavItem title={'Landings'} id={''} />
-				</Box>
-				<Box>
-					<NavItem title={'Company'} id={''} />
-				</Box>
-				<Box>
-					<NavItem title={'Pages'} id={''} />
-				</Box>
-				<Box>
-					<NavItem title={'Account'} id={''} />
-				</Box>
-				<Box>
-					<NavItem title={'Blog'} id={''} />
-				</Box>
-				<Box>
-					<NavItem title={'Portfolio'} id={''} />
-				</Box>
+				{pages.map((page: any, index: number) => {
+					return (
+						<Box key={index.toString()} marginY={2}>
+							<Box>
+								<NavItem
+									title={page.title}
+									onClick={() => {
+										router.push(page.href)
+									}}
+									id={`side-${index}`}
+								/>
+							</Box>
+						</Box>
+					)
+				})}
 			</Box>
 		</Box>
 	)
 }
 
 SidebarNav.propTypes = {
-	pages: PropTypes.object.isRequired,
+	pages: PropTypes.array.isRequired,
 }
 
 export default SidebarNav

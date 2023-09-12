@@ -13,9 +13,9 @@ export default function Home() {
 	return (
 		<>
 			<Welcome />
-			<Container>
+			{/* <Container>
 				<Product />
-			</Container>
+			</Container> */}
 		</>
 	)
 }

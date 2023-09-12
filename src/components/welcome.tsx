@@ -36,16 +36,18 @@ const Welcome = () => {
 										fontWeight: 700,
 									}}
 								>
-									Integrate <br />
-									Web 2.0 and Web 3.0
+									DQuark <br />
+									Notification Center
 								</Typography>
 							</Box>
 							<Box marginBottom={3}>
-								<Typography variant="h6" component="p" color="text.secondary">
-									Web 2.0 and web 3.0 integration services.
+								<Typography variant="h6" component="p" color="text.primary">
+									Quark is Simple, Secure and Easy to Use Notification Center On
+									Solana. <br />
 									<br />
-									DQuark Network aims to remove all barriers between you and
-									just getting development faster.
+									<b>ZERO</b> SIGNATURE. <b>ZERO</b> SEED PHRASE.
+									<br />
+									<b>ZERO</b> ADDTIONAL SDK.
 								</Typography>
 							</Box>
 							<Box

@@ -33,6 +33,7 @@ NavItem.propTypes = {
 	title: PropTypes.string.isRequired,
 	id: PropTypes.string.isRequired,
 	colorInvert: PropTypes.bool,
+	onClick: PropTypes.func,
 }
 
 export default NavItem

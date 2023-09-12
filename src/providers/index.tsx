@@ -1,6 +1,7 @@
 import { NextIntlClientProvider } from 'next-intl'
 import { notFound } from 'next/navigation'
-import QuarkThemeProvider from './providers/theme'
+import QuarkThemeProvider from './theme'
+import { FirebaseProvider } from './firebase'
 
 export default async function Providers({
 	children,
@@ -11,14 +12,14 @@ export default async function Providers({
 }) {
 	let messages
 	try {
-		messages = (await import(`./locales/${params.locale}.json`)).default
+		messages = (await import(`../locales/${params.locale}.json`)).default
 	} catch (error) {
 		notFound()
 	}
 	return (
 		<QuarkThemeProvider>
 			<NextIntlClientProvider locale={params.locale} messages={messages}>
-				{children}
+				<FirebaseProvider>{children}</FirebaseProvider>
 			</NextIntlClientProvider>
 		</QuarkThemeProvider>
 	)
