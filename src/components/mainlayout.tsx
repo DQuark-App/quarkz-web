@@ -71,7 +71,6 @@ export default function MainLayout({
 				pages={pages}
 			/>
 			<main>{children}</main>
-			<hr />
 			<Container>
 				<Footer />
 			</Container>

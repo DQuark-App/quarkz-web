@@ -9,6 +9,7 @@ import MenuIcon from '@mui/icons-material/Menu'
 import NavItem from './navitem'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
+import { Typography } from '@mui/material'
 
 const Topbar = ({ onSidebarOpen, pages = [], colorInvert = false }: any) => {
 	const theme = useTheme()
@@ -22,19 +23,16 @@ const Topbar = ({ onSidebarOpen, pages = [], colorInvert = false }: any) => {
 			alignItems={'center'}
 			width={1}
 		>
-			<Box
-				display={'flex'}
-				component="a"
-				href="/"
-				title="theFront"
-				width={{ xs: 100, md: 120 }}
-			>
+			<Box display={'flex'} width={{ xs: 100, md: 120 }} alignItems={'center'}>
 				<Image
 					src={'/logo-no-background.png'}
-					width={180}
+					width={60}
 					height={60}
 					alt={''}
 				/>
+				<Typography variant={'h4'} color={'white'}>
+					QUARK
+				</Typography>
 			</Box>
 			<Box sx={{ display: { xs: 'none', md: 'flex' } }} alignItems={'center'}>
 				{pages.map((page: any, index: number) => {

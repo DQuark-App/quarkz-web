@@ -6,6 +6,8 @@ import Box from '@mui/material/Box'
 import { useTheme } from '@mui/material/styles'
 import NavItem from './navitem'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
+import { Typography } from '@mui/material'
 
 const SidebarNav = ({ pages }: any) => {
 	const theme = useTheme()
@@ -15,23 +17,22 @@ const SidebarNav = ({ pages }: any) => {
 	return (
 		<Box>
 			<Box width={1} paddingX={2} paddingY={1}>
-				<Box
-					display={'flex'}
-					component="a"
-					href="/"
-					title="theFront"
-					width={{ xs: 100, md: 120 }}
-				>
+				<Box display={'flex'} width={{ xs: 100, md: 120 }}>
 					<Box
-						component={'img'}
-						src={
-							mode === 'light'
-								? 'https://assets.maccarianagency.com/the-front/logos/logo.svg'
-								: 'https://assets.maccarianagency.com/the-front/logos/logo-negative.svg'
-						}
-						height={1}
-						width={1}
-					/>
+						display={'flex'}
+						width={{ xs: 100, md: 120 }}
+						alignItems={'center'}
+					>
+						<Image
+							src={'/logo-no-background.png'}
+							width={60}
+							height={60}
+							alt={''}
+						/>
+						<Typography variant={'h4'} color={'white'}>
+							QUARK
+						</Typography>
+					</Box>
 				</Box>
 			</Box>
 			<Box paddingX={2} paddingY={2}>

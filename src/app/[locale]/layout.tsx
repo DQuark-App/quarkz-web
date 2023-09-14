@@ -4,6 +4,7 @@ import '@fontsource/roboto/300.css'
 import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/500.css'
 import '@fontsource/roboto/700.css'
+import { Paper } from '@mui/material'
 
 export default function LocaleLayout({
 	children,
@@ -16,7 +17,9 @@ export default function LocaleLayout({
 		<html lang="en">
 			<body>
 				<Providers params={params}>
-					<MainLayout>{children}</MainLayout>
+					<Paper>
+						<MainLayout>{children}</MainLayout>
+					</Paper>
 				</Providers>
 			</body>
 		</html>

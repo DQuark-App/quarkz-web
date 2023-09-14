@@ -18,7 +18,7 @@ const Welcome = () => {
 	return (
 		<Box bgcolor={'alternate.main'} padding={{ xs: 2, md: 4 }} borderRadius={2}>
 			<Container>
-				<Grid container spacing={4}>
+				<Grid container spacing={4} marginY={3}>
 					<Grid
 						item
 						container
@@ -28,7 +28,7 @@ const Welcome = () => {
 						sx={{ position: 'relative' }}
 					>
 						<Box data-aos={isMd ? 'fade-right' : 'fade-up'} marginBottom={4}>
-							<Box marginBottom={2}>
+							<Box marginBottom={4}>
 								<Typography
 									variant="h3"
 									component={'h3'}
@@ -66,7 +66,7 @@ const Welcome = () => {
 								</Box>
 								<Box
 									component={Button}
-									color="primary"
+									color="white"
 									size="large"
 									fullWidth={!isMd}
 									marginTop={{ xs: 1, sm: 0 }}
