@@ -3,20 +3,20 @@ import { NextRequest, NextResponse } from 'next/server'
 import createAdminGuard from './guard/admin'
 
 const middleware = (request: NextRequest) => {
-	if (request.nextUrl.pathname.startsWith('/api')) {
-		return createAdminGuard(request)
-	}
+    if (request.nextUrl.pathname.startsWith('/api')) {
+        return createAdminGuard(request)
+    }
 
-	const localeMiddleWare = createMiddleware({
-		locales: ['en', 'id'],
-		defaultLocale: 'en',
-	})
+    const localeMiddleWare = createMiddleware({
+        locales: ['en', 'id'],
+        defaultLocale: 'en',
+    })
 
-	return localeMiddleWare(request)
+    return localeMiddleWare(request)
 }
 
 export default middleware
 
 export const config = {
-	matcher: ['/((?!app|_next|.*\\..*).*)'],
+    matcher: ['/((?!app|_next|.*\\..*).*)'],
 }

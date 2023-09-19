@@ -7,21 +7,21 @@ import '@fontsource/roboto/700.css'
 import { Paper } from '@mui/material'
 
 export default function LocaleLayout({
-	children,
-	params,
+    children,
+    params,
 }: {
-	children: React.ReactNode
-	params: any
+    children: React.ReactNode
+    params: any
 }) {
-	return (
-		<html lang="en">
-			<body>
-				<Providers params={params}>
-					<Paper>
-						<MainLayout>{children}</MainLayout>
-					</Paper>
-				</Providers>
-			</body>
-		</html>
-	)
+    return (
+        <html lang="en">
+            <body>
+                <Providers params={params}>
+                    <Paper>
+                        <MainLayout>{children}</MainLayout>
+                    </Paper>
+                </Providers>
+            </body>
+        </html>
+    )
 }

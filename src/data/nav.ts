@@ -1,19 +1,15 @@
 export interface Page {
-	title: string
-	href: string
+    title: string
+    href: string
 }
 
 export const pages: Page[] = [
-	{
-		title: 'Home',
-		href: '/',
-	},
-	{
-		title: 'How to Get Listed',
-		href: '/listing',
-	},
-	{
-		title: 'Sign In',
-		href: '/login',
-	},
+    {
+        title: 'Home',
+        href: '/',
+    },
+    {
+        title: 'Login',
+        href: '/login',
+    },
 ]

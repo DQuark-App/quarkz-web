@@ -7,36 +7,36 @@ import Box from '@mui/material/Box'
 import SidebarNav from './sidenav'
 
 const Sidebar = ({ pages, open, variant, onClose }: any) => {
-	return (
-		<Drawer
-			anchor="left"
-			onClose={() => onClose()}
-			open={open}
-			variant={variant}
-			sx={{
-				'& .MuiPaper-root': {
-					width: '100%',
-					maxWidth: 280,
-				},
-			}}
-		>
-			<Box
-				sx={{
-					height: '100%',
-					padding: 1,
-				}}
-			>
-				<SidebarNav pages={pages} />
-			</Box>
-		</Drawer>
-	)
+    return (
+        <Drawer
+            anchor="left"
+            onClose={() => onClose()}
+            open={open}
+            variant={variant}
+            sx={{
+                '& .MuiPaper-root': {
+                    width: '100%',
+                    maxWidth: 280,
+                },
+            }}
+        >
+            <Box
+                sx={{
+                    height: '100%',
+                    padding: 1,
+                }}
+            >
+                <SidebarNav pages={pages} />
+            </Box>
+        </Drawer>
+    )
 }
 
 Sidebar.propTypes = {
-	onClose: PropTypes.func,
-	open: PropTypes.bool.isRequired,
-	variant: PropTypes.string.isRequired,
-	pages: PropTypes.array.isRequired,
+    onClose: PropTypes.func,
+    open: PropTypes.bool.isRequired,
+    variant: PropTypes.string.isRequired,
+    pages: PropTypes.array.isRequired,
 }
 
 export default Sidebar

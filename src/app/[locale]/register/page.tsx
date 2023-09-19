@@ -1,8 +1,8 @@
 import Container from '@/components/container'
-import SignInForm from '@/components/signin'
 import { Box, Grid } from '@mui/material'
+import SignUpForm from '@/components/signup'
 
-export default function Login() {
+export default function SignUp() {
     return (
         <>
             <Container>
@@ -18,7 +18,7 @@ export default function Login() {
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <SignInForm />
+                        <SignUpForm />
                     </Grid>
                 </Grid>
             </Container>

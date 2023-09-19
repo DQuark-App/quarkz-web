@@ -4,23 +4,23 @@ import QuarkThemeProvider from './theme'
 import { FirebaseProvider } from './firebase'
 
 export default async function Providers({
-	children,
-	params,
+    children,
+    params,
 }: {
-	children: React.ReactNode
-	params: any
+    children: React.ReactNode
+    params: any
 }) {
-	let messages
-	try {
-		messages = (await import(`../locales/${params.locale}.json`)).default
-	} catch (error) {
-		notFound()
-	}
-	return (
-		<QuarkThemeProvider>
-			<NextIntlClientProvider locale={params.locale} messages={messages}>
-				<FirebaseProvider>{children}</FirebaseProvider>
-			</NextIntlClientProvider>
-		</QuarkThemeProvider>
-	)
+    let messages
+    try {
+        messages = (await import(`../locales/${params.locale}.json`)).default
+    } catch (error) {
+        notFound()
+    }
+    return (
+        <QuarkThemeProvider>
+            <NextIntlClientProvider locale={params.locale} messages={messages}>
+                <FirebaseProvider>{children}</FirebaseProvider>
+            </NextIntlClientProvider>
+        </QuarkThemeProvider>
+    )
 }
