@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 'use client'
 
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import Grid from '@mui/material/Grid'
@@ -11,6 +11,9 @@ import Typography from '@mui/material/Typography'
 import Link from '@mui/material/Link'
 import { firebaseAuth, useDQuarkUser } from '@/providers/firebase'
 import { useForm } from 'react-hook-form'
+import { createUserWithEmailAndPassword } from '@firebase/auth'
+import { useRouter } from 'next/navigation'
+import { Alert, AlertTitle } from '@mui/material'
 
 type SignUpValues = {
     email: string
@@ -18,13 +21,28 @@ type SignUpValues = {
     confirm_Password: string
 }
 const SignUpForm = () => {
+    const router = useRouter()
     const {
         getValues,
         handleSubmit,
         register,
         formState: { errors },
     } = useForm<SignUpValues>()
-    const onSignUp = async (data: SignUpValues) => {}
+    const [error, setError] = useState<string>('')
+    const onSignUp = async (data: SignUpValues) => {
+        try {
+            await createUserWithEmailAndPassword(
+                firebaseAuth,
+                data.email,
+                data.password
+            )
+
+            router.push('/login')
+        } catch (error) {
+            console.log(error)
+            setError('Failed to create an account')
+        }
+    }
 
     useEffect(() => {
         if (firebaseAuth.currentUser) {
@@ -46,6 +64,15 @@ const SignUpForm = () => {
             <Card sx={{ p: { xs: 4, md: 6 } }}>
                 <form onSubmit={handleSubmit(onSignUp)}>
                     <Grid container spacing={4}>
+                        {error && (
+                            <Grid item xs={12} marginY={2}>
+                                <Alert severity="error">
+                                    <AlertTitle>Error</AlertTitle>
+                                    {error}
+                                </Alert>
+                            </Grid>
+                        )}
+
                         <Grid item xs={12}>
                             <Typography
                                 variant={'subtitle2'}

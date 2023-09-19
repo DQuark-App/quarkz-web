@@ -21,12 +21,12 @@ const firebaseConfig = {
 export const firebaseApp = initializeApp(firebaseConfig)
 export const firebaseAuth = getAuth(firebaseApp)
 
-type DQuarkUser = User | null
+type DQuarkUser = User | null | undefined
 
-const FirebaseAuthContext = createContext<DQuarkUser>(null)
+const FirebaseAuthContext = createContext<DQuarkUser>(undefined)
 
 export const FirebaseProvider = ({ children }: { children: ReactNode }) => {
-    const [user, setUser] = useState<DQuarkUser>(null)
+    const [user, setUser] = useState<DQuarkUser>(undefined)
 
     useEffect(() => {
         onAuthStateChanged(firebaseAuth, (user: User | null) => {

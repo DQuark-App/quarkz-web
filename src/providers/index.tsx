@@ -2,6 +2,7 @@ import { NextIntlClientProvider } from 'next-intl'
 import { notFound } from 'next/navigation'
 import QuarkThemeProvider from './theme'
 import { FirebaseProvider } from './firebase'
+import { SolanaProvider } from '@/providers/solana'
 
 export default async function Providers({
     children,
@@ -19,7 +20,9 @@ export default async function Providers({
     return (
         <QuarkThemeProvider>
             <NextIntlClientProvider locale={params.locale} messages={messages}>
-                <FirebaseProvider>{children}</FirebaseProvider>
+                <FirebaseProvider>
+                    <SolanaProvider>{children}</SolanaProvider>
+                </FirebaseProvider>
             </NextIntlClientProvider>
         </QuarkThemeProvider>
     )

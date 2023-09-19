@@ -1,6 +1,6 @@
 'use client'
 
-import { useDQuarkUser } from '@/providers/firebase'
+import { firebaseAuth, useDQuarkUser } from '@/providers/firebase'
 import { ReactNode, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
@@ -10,7 +10,8 @@ export default function Protected({ children }: { children: ReactNode }) {
     const router = useRouter()
 
     useEffect(() => {
-        if (!user) {
+        console.log(user)
+        if (user === null) {
             router.push('/login')
         }
         setLoading(false)
