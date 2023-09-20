@@ -8,7 +8,7 @@ const middleware = (request: NextRequest) => {
     }
 
     const localeMiddleWare = createMiddleware({
-        locales: ['en', 'id'],
+        locales: ['en'],
         defaultLocale: 'en',
     })
 

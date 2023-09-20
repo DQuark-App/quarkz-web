@@ -8,6 +8,7 @@ import NavItem from './navitem'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { Typography } from '@mui/material'
+import Logo from '@/components/logo'
 
 const SidebarNav = ({ pages }: any) => {
     const theme = useTheme()
@@ -23,15 +24,7 @@ const SidebarNav = ({ pages }: any) => {
                         width={{ xs: 100, md: 120 }}
                         alignItems={'center'}
                     >
-                        <Image
-                            src={'/logo-no-background.png'}
-                            width={60}
-                            height={60}
-                            alt={''}
-                        />
-                        <Typography variant={'h4'} color={'white'}>
-                            QUARK
-                        </Typography>
+                        <Logo />
                     </Box>
                 </Box>
             </Box>

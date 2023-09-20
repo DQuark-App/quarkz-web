@@ -4,19 +4,20 @@ import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/500.css'
 import '@fontsource/roboto/700.css'
 import Protected from '@/components/protected'
+import AppLayout from '@/components/applayout'
 
-export default function AppLayout({
+export default function AppRootLayout({
     children,
-    params,
 }: {
     children: React.ReactNode
-    params: any
 }) {
     return (
         <html lang="en">
             <body>
                 <AppProviders>
-                    <Protected>{children}</Protected>
+                    <Protected>
+                        <AppLayout>{children}</AppLayout>
+                    </Protected>
                 </AppProviders>
             </body>
         </html>

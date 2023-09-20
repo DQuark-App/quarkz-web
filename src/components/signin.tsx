@@ -15,7 +15,7 @@ import {
     signInWithEmailAndPassword,
 } from '@firebase/auth'
 import { firebaseAuth } from '@/providers/firebase'
-import { Alert, AlertTitle } from '@mui/material'
+import { Alert, AlertTitle, CircularProgress } from '@mui/material'
 import { useRouter } from 'next/navigation'
 import { useWalletModal } from '@solana/wallet-adapter-react-ui'
 import { useWallet } from '@solana/wallet-adapter-react'
@@ -33,8 +33,10 @@ const SignInForm = () => {
     const [error, setError] = useState<string>('')
     const { setVisible: setModalVisible } = useWalletModal()
     const { publicKey, disconnect, signMessage } = useWallet()
+    const [loading, setLoading] = useState<boolean>(false)
 
     const onSignInEmail = async (data: SignInValues) => {
+        setLoading(true)
         try {
             await signInWithEmailAndPassword(
                 firebaseAuth,
@@ -47,8 +49,10 @@ const SignInForm = () => {
             console.log(e)
             setError('Failed to sign in. Invalid email or password')
         }
+        setLoading(false)
     }
     const onSignInWallet = async () => {
+        setLoading(true)
         try {
             if (!signMessage) {
                 throw new Error('Sign message not supported')
@@ -77,6 +81,7 @@ const SignInForm = () => {
             console.log(e)
             setError('Failed to sign in. Can not verify address')
         }
+        setLoading(false)
     }
     return (
         <Box maxWidth={600}>
@@ -195,7 +200,14 @@ const SignInForm = () => {
                                     variant={'contained'}
                                     fullWidth
                                     type={'submit'}
+                                    disabled={loading}
                                 >
+                                    {loading && (
+                                        <CircularProgress
+                                            size={'1rem'}
+                                            sx={{ marginRight: '10px' }}
+                                        />
+                                    )}{' '}
                                     Login
                                 </Button>
                             </Box>
@@ -236,8 +248,15 @@ const SignInForm = () => {
                                         fullWidth
                                         type={'button'}
                                         onClick={onSignInWallet}
+                                        disabled={loading}
                                     >
-                                        Sign In
+                                        {loading && (
+                                            <CircularProgress
+                                                size={'1rem'}
+                                                sx={{ marginRight: '10px' }}
+                                            />
+                                        )}{' '}
+                                        Login with Wallet
                                     </Button>
                                 </Box>
                             )}

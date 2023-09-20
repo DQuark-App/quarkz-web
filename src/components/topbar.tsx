@@ -7,9 +7,8 @@ import Button from '@mui/material/Button'
 import { alpha, useTheme } from '@mui/material/styles'
 import MenuIcon from '@mui/icons-material/Menu'
 import NavItem from './navitem'
-import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import { Typography } from '@mui/material'
+import Logo from '@/components/logo'
 
 const Topbar = ({ onSidebarOpen, pages = [], colorInvert = false }: any) => {
     const theme = useTheme()
@@ -28,15 +27,7 @@ const Topbar = ({ onSidebarOpen, pages = [], colorInvert = false }: any) => {
                 width={{ xs: 100, md: 120 }}
                 alignItems={'center'}
             >
-                <Image
-                    src={'/logo-no-background.png'}
-                    width={60}
-                    height={60}
-                    alt={''}
-                />
-                <Typography variant={'h4'} color={'white'}>
-                    QUARK
-                </Typography>
+                <Logo />
             </Box>
             <Box
                 sx={{ display: { xs: 'none', md: 'flex' } }}
