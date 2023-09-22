@@ -5,6 +5,10 @@ import { Buffer } from 'buffer'
 import * as bs58 from 'bs58'
 const createAdminGuard = async (request: NextRequest) => {
     const authorization = request.headers.get('Authorization')
+        ? request.headers.get('Authorization')
+        : request.headers.get('authorization')
+        ? request.headers.get('authorization')
+        : null
     if (!authorization) {
         return NextResponse.json(
             { error: 'Unauthorized no header found' },
