@@ -6,7 +6,10 @@ import * as bs58 from 'bs58'
 const createAdminGuard = async (request: NextRequest) => {
     const authorization = request.headers.get('Authorization')
     if (!authorization) {
-        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+        return NextResponse.json(
+            { error: 'Unauthorized no header found' },
+            { status: 401 }
+        )
     }
     let userId: string | null = null
 
@@ -23,7 +26,7 @@ const createAdminGuard = async (request: NextRequest) => {
         if (!isValid) {
             return NextResponse.json(
                 { error: 'Unauthorized Wallet Token' },
-                { status: 200 }
+                { status: 401 }
             )
         }
 
@@ -38,7 +41,7 @@ const createAdminGuard = async (request: NextRequest) => {
     if (!userId) {
         return NextResponse.json(
             { error: 'Unauthorized Firebase Token' },
-            { status: 200 }
+            { status: 401 }
         )
     }
     const response = NextResponse.next()
