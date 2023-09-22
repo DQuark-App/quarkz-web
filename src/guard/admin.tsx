@@ -21,7 +21,10 @@ const createAdminGuard = async (request: NextRequest) => {
             bs58.decode(publicKey)
         )
         if (!isValid) {
-            return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+            return NextResponse.json(
+                { error: 'Unauthorized Wallet Token' },
+                { status: 401 }
+            )
         }
 
         userId = publicKey
@@ -33,7 +36,10 @@ const createAdminGuard = async (request: NextRequest) => {
     } catch (e) {}
 
     if (!userId) {
-        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+        return NextResponse.json(
+            { error: 'Unauthorized Firebase Token' },
+            { status: 401 }
+        )
     }
     const response = NextResponse.next()
     response.headers.set('x-user-id', userId)
