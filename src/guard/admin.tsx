@@ -23,7 +23,7 @@ const createAdminGuard = async (request: NextRequest) => {
         if (!isValid) {
             return NextResponse.json(
                 { error: 'Unauthorized Wallet Token' },
-                { status: 401 }
+                { status: 200 }
             )
         }
 
@@ -38,7 +38,7 @@ const createAdminGuard = async (request: NextRequest) => {
     if (!userId) {
         return NextResponse.json(
             { error: 'Unauthorized Firebase Token' },
-            { status: 401 }
+            { status: 200 }
         )
     }
     const response = NextResponse.next()
