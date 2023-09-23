@@ -10,8 +10,13 @@ const createAdminGuard = async (request: NextRequest) => {
         ? request.headers.get('authorization')
         : null
     if (!authorization) {
+        let headers = []
+        // @ts-ignore
+        for (const [key, value] of request.headers.entries()) {
+            headers.push({ key, value })
+        }
         return NextResponse.json(
-            { error: 'Unauthorized no header found' },
+            { error: 'Unauthorized no header found', headers: headers },
             { status: 401 }
         )
     }
