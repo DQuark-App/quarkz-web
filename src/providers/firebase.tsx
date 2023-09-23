@@ -9,6 +9,7 @@ import {
 } from 'react'
 import { initializeApp } from 'firebase/app'
 import { getAuth, onAuthStateChanged, User } from 'firebase/auth'
+import useStore from '@/store'
 
 const firebaseConfig = {
     apiKey: 'AIzaSyDxkv30TPyHp_pFAPaFQAp8dRX3sWabuFU',
@@ -26,20 +27,16 @@ type DQuarkUser = User | null | undefined
 const FirebaseAuthContext = createContext<DQuarkUser>(undefined)
 
 export const FirebaseProvider = ({ children }: { children: ReactNode }) => {
-    const [user, setUser] = useState<DQuarkUser>(undefined)
+    const store = useStore()
 
     useEffect(() => {
         onAuthStateChanged(firebaseAuth, (user: User | null) => {
-            setUser(user)
+            store.setUser(user)
         })
     }, [])
     return (
-        <FirebaseAuthContext.Provider value={user}>
+        <FirebaseAuthContext.Provider value={store.user}>
             {children}
         </FirebaseAuthContext.Provider>
     )
-}
-
-export const useDQuarkUser = () => {
-    return useContext(FirebaseAuthContext)
 }

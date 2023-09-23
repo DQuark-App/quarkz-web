@@ -11,14 +11,19 @@ import Typography from '@mui/material/Typography'
 import Link from '@mui/material/Link'
 import { useForm } from 'react-hook-form'
 import {
+    GoogleAuthProvider,
     signInWithCustomToken,
     signInWithEmailAndPassword,
+    signInWithPopup,
+    signInWithRedirect,
 } from '@firebase/auth'
 import { firebaseAuth } from '@/providers/firebase'
 import { Alert, AlertTitle, CircularProgress } from '@mui/material'
 import { useRouter } from 'next/navigation'
 import { useWalletModal } from '@solana/wallet-adapter-react-ui'
 import { useWallet } from '@solana/wallet-adapter-react'
+import GoogleIcon from '@mui/icons-material/Google'
+
 type SignInValues = {
     email: string
     password: string
@@ -48,6 +53,17 @@ const SignInForm = () => {
         } catch (e) {
             console.log(e)
             setError('Failed to sign in. Invalid email or password')
+        }
+        setLoading(false)
+    }
+    const onSignInWithGoogle = async () => {
+        setLoading(true)
+        try {
+            await signInWithPopup(firebaseAuth, new GoogleAuthProvider())
+            router.push('/app')
+        } catch (e) {
+            console.log(e)
+            setError('Failed to sign in with google')
         }
         setLoading(false)
     }
@@ -211,8 +227,29 @@ const SignInForm = () => {
                                     Login
                                 </Button>
                             </Box>
+                            <Grid item container xs={12} marginTop={3}>
+                                <Box width={'100%'}>
+                                    <Button
+                                        size={'large'}
+                                        variant={'outlined'}
+                                        fullWidth
+                                        type={'button'}
+                                        onClick={onSignInWithGoogle}
+                                        disabled={loading}
+                                        style={{
+                                            backgroundColor: 'white',
+                                            color: 'black',
+                                        }}
+                                    >
+                                        <GoogleIcon
+                                            style={{ marginRight: 10 }}
+                                        />
+                                        Login With Google
+                                    </Button>
+                                </Box>
+                            </Grid>
                             {!publicKey && (
-                                <Box width={'100%'} marginY={3}>
+                                <Box width={'100%'} marginTop={3}>
                                     <Button
                                         size={'large'}
                                         variant={'outlined'}
@@ -227,7 +264,11 @@ const SignInForm = () => {
                                 </Box>
                             )}
                             {publicKey && (
-                                <Box width={'50%'} marginY={3} paddingRight={1}>
+                                <Box
+                                    width={'50%'}
+                                    marginTop={3}
+                                    paddingRight={1}
+                                >
                                     <Button
                                         size={'large'}
                                         variant={'outlined'}
@@ -241,7 +282,11 @@ const SignInForm = () => {
                             )}
 
                             {publicKey && (
-                                <Box width={'50%'} marginY={3} paddingLeft={1}>
+                                <Box
+                                    width={'50%'}
+                                    marginTop={3}
+                                    paddingLeft={1}
+                                >
                                     <Button
                                         size={'large'}
                                         variant={'contained'}

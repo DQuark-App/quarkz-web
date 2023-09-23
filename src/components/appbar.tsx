@@ -7,15 +7,17 @@ import Toolbar from '@mui/material/Toolbar'
 import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 import AccountCircle from '@mui/icons-material/AccountCircle'
-import { firebaseAuth, useDQuarkUser } from '@/providers/firebase'
+import { firebaseAuth } from '@/providers/firebase'
+import useStore from '@/store'
 
 interface PrimaryAppBarProps {
     title: string
 }
 export default function PrimaryAppBar({ title = '' }: PrimaryAppBarProps) {
-    const user = useDQuarkUser()
+    const store = useStore()
+    const user = store.user
     const signOut = () => {
-        firebaseAuth.signOut()
+        store.signOut()
     }
 
     return (

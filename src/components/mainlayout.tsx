@@ -13,7 +13,7 @@ import {
 import { useState } from 'react'
 import { pages } from '@/data/nav'
 import Footer from './footer'
-import { useDQuarkUser } from '@/providers/firebase'
+import useStore from '@/store'
 
 export default function MainLayout({
     children,
@@ -25,11 +25,12 @@ export default function MainLayout({
     bgcolor?: string
 }) {
     const theme = useTheme()
+    const store = useStore()
     const isMd = useMediaQuery(theme.breakpoints.up('md'), {
         defaultMatches: true,
     })
     const [openSidebar, setOpenSidebar] = useState(false)
-    const user = useDQuarkUser()
+    const user = store.user
 
     const handleSidebarOpen = () => {
         setOpenSidebar(true)
