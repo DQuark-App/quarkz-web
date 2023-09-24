@@ -9,18 +9,40 @@ export type Json =
 export interface Database {
     public: {
         Tables: {
-            hello: {
+            folder: {
                 Row: {
                     id: number
+                    uid: string
                     name: string
+                    user_id: string
+                    created_at: Date
                 }
                 Insert: {
                     id?: never
+                    uid: string
                     name: string
+                    user_id: string
+                    created_at: Date
                 }
                 Update: {
                     id?: never
                     name?: string
+                }
+            }
+            file: {
+                Row: {
+                    id: number
+                    cid: string
+                    user_id: string
+                    album_uid: string
+                    created_at: Date
+                }
+                Insert: {
+                    id?: never
+                    cid: string
+                    user_id: string
+                    album_uid: string
+                    created_at: Date
                 }
             }
         }
