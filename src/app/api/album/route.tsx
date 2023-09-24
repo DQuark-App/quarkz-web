@@ -87,13 +87,13 @@ export async function PUT(request: NextRequest) {
 }
 
 export async function DELETE(request: NextRequest) {
-    const data = (await request.json()) as Folder
+    const uid = request.nextUrl.searchParams.get('uid')
     const userId = request.headers.get('x-user-id')
     const checkFolder = (
         await SupaBaseService.instance
             .from('folder')
             .select('*')
-            .eq('uid', data.uid)
+            .eq('uid', uid)
             .eq('user_id', userId)
     ).data
 
@@ -107,7 +107,7 @@ export async function DELETE(request: NextRequest) {
     const result = await SupaBaseService.instance
         .from('folder')
         .delete()
-        .eq('uid', data.uid)
+        .eq('uid', uid)
 
     if (result.error) {
         return NextResponse.json(
