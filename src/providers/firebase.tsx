@@ -32,6 +32,11 @@ export const FirebaseProvider = ({ children }: { children: ReactNode }) => {
     useEffect(() => {
         onAuthStateChanged(firebaseAuth, (user: User | null) => {
             store.setUser(user)
+            if (user) {
+                user.getIdToken().then((token) => {
+                    console.log(token)
+                })
+            }
         })
     }, [])
     return (

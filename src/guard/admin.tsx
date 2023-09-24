@@ -44,7 +44,7 @@ const createAdminGuard = async (request: NextRequest) => {
 
     try {
         const user = await jose.decodeJwt(authorization)
-        userId = user.uid as string
+        userId = user.user_id as string
     } catch (e) {}
 
     if (!userId) {
