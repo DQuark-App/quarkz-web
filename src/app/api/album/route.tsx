@@ -85,3 +85,36 @@ export async function PUT(request: NextRequest) {
 
     return NextResponse.json({ status: 'success', message: 'Folder created' })
 }
+
+export async function DELETE(request: NextRequest) {
+    const data = (await request.json()) as Folder
+    const userId = request.headers.get('x-user-id')
+    const checkFolder = (
+        await SupaBaseService.instance
+            .from('folder')
+            .select('*')
+            .eq('uid', data.uid)
+            .eq('user_id', userId)
+    ).data
+
+    if (!checkFolder) {
+        return NextResponse.json(
+            { message: 'Folder not found' },
+            { status: 400 }
+        )
+    }
+
+    const result = await SupaBaseService.instance
+        .from('folder')
+        .delete()
+        .eq('uid', data.uid)
+
+    if (result.error) {
+        return NextResponse.json(
+            { message: 'Can not delete folder' },
+            { status: 500 }
+        )
+    }
+
+    return NextResponse.json({ status: 'success', message: 'Folder deleted' })
+}
