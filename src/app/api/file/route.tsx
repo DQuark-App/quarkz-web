@@ -13,18 +13,15 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
-    const form = await request.formData()
-    const file = form.get('file')
-    const albumUid = form.get('album_uid')
+    const form = (await request.json()) as { data: string; album_uid: string }
     const userId = request.headers.get('x-user-id')
+    const buffer = Buffer.from(form.data, 'base64')
 
-    if (!file) return NextResponse.json({ error: 'No file' })
-
-    const cid = await Storage.instance.storeBlob(file as Blob)
+    const cid = await Storage.instance.storeBlob(new Blob([buffer]))
 
     const result = await SupaBaseService.instance.from('file').insert({
         cid: cid,
-        album_uid: albumUid,
+        album_uid: form.album_uid,
         user_id: userId,
         created_at: new Date(),
     })
