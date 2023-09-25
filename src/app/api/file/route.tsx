@@ -4,11 +4,14 @@ import SupaBaseService from '@/service/supabase'
 
 export async function GET(request: NextRequest) {
     const userId = request.headers.get('x-user-id')
+    const latestTimestamp = request.nextUrl.searchParams.get('latest_timestamp')
     const result = await SupaBaseService.instance
         .from('file')
         .select('*')
         .eq('user_id', userId)
         .eq('album_uid', request.nextUrl.searchParams.get('album_uid'))
+        .gte('created_at', new Date(latestTimestamp || 0))
+        .limit(10)
     return NextResponse.json({ data: result.data || [] })
 }
 

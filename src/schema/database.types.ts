@@ -16,6 +16,7 @@ export interface Database {
                     name: string
                     user_id: string
                     created_at: Date
+                    updated_at: Date
                 }
                 Insert: {
                     id?: never
@@ -23,10 +24,12 @@ export interface Database {
                     name: string
                     user_id: string
                     created_at: Date
+                    updated_at: Date
                 }
                 Update: {
                     id?: never
                     name?: string
+                    updated_at?: Date
                 }
             }
             file: {

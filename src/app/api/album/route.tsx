@@ -9,10 +9,13 @@ type Folder = {
 
 export async function GET(request: NextRequest) {
     const userId = request.headers.get('x-user-id')
+    const lastTimestamp = request.nextUrl.searchParams.get('last_timestamp')
     const result = await SupaBaseService.instance
         .from('folder')
         .select('name, uid, created_at')
         .eq('user_id', userId)
+        .gte('created_at', new Date(lastTimestamp || 0))
+        .limit(10)
     return NextResponse.json({ data: result.data || [] })
 }
 export async function POST(request: NextRequest) {
@@ -37,6 +40,7 @@ export async function POST(request: NextRequest) {
         .from('folder')
         .update({
             name: data.name,
+            updated_at: new Date(),
         })
         .eq('uid', data.uid)
 
@@ -74,6 +78,7 @@ export async function PUT(request: NextRequest) {
         name: data.name,
         user_id: userId,
         created_at: new Date(),
+        updated_at: new Date(),
     })
 
     if (result.error) {
