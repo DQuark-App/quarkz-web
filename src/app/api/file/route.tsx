@@ -19,6 +19,22 @@ export async function POST(request: NextRequest) {
 
     const cid = await Storage.instance.storeBlob(new Blob([buffer]))
 
+    const check = (
+        await SupaBaseService.instance
+            .from('file')
+            .select('*')
+            .eq('cid', cid)
+            .eq('user_id', userId)
+            .eq('album_uid', form.album_uid)
+    ).data
+
+    if (check && check.length > 0) {
+        return NextResponse.json(
+            { message: 'file already exist' },
+            { status: 200 }
+        )
+    }
+
     const result = await SupaBaseService.instance.from('file').insert({
         cid: cid,
         album_uid: form.album_uid,
