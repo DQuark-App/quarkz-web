@@ -10,8 +10,8 @@ export async function GET(request: NextRequest) {
         .select('*')
         .eq('user_id', userId)
         .eq('album_uid', request.nextUrl.searchParams.get('album_uid'))
-        .gte('created_at', new Date(lastTimestamp ? Number(lastTimestamp) : 0))
-        .lte('created_at', new Date())
+        .gte('updated_at', new Date(lastTimestamp ? Number(lastTimestamp) : 0))
+        .lte('updated_at', new Date())
         .limit(10)
     return NextResponse.json({ data: result.data || [] })
 }
