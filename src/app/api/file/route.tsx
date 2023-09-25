@@ -11,10 +11,10 @@ export async function GET(request: NextRequest) {
         .eq('user_id', userId)
         .eq('album_uid', request.nextUrl.searchParams.get('album_uid'))
         .gte(
-            'updated_at',
+            'created_at',
             new Date(lastTimestamp ? Number(lastTimestamp) : 0).toUTCString()
         )
-        .lte('updated_at', new Date().toUTCString())
+        .lte('created_at', new Date().toUTCString())
         .limit(10)
     return NextResponse.json({ data: result.data || [] })
 }
