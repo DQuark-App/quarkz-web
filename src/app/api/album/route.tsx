@@ -14,7 +14,8 @@ export async function GET(request: NextRequest) {
         .from('folder')
         .select('name, uid, created_at')
         .eq('user_id', userId)
-        .gte('created_at', new Date(lastTimestamp || 0))
+        .gte('created_at', new Date(lastTimestamp ? Number(lastTimestamp) : 0))
+        .lte('created_at', new Date())
         .limit(10)
     return NextResponse.json({ data: result.data || [] })
 }
