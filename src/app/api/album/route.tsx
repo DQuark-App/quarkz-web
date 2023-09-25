@@ -12,13 +12,13 @@ export async function GET(request: NextRequest) {
     const lastTimestamp = request.nextUrl.searchParams.get('last_timestamp')
     const result = await SupaBaseService.instance
         .from('folder')
-        .select('name, uid, created_at')
+        .select('name, uid, created_at, updated_at')
         .eq('user_id', userId)
         .gte(
-            'created_at',
+            'updated_at',
             new Date(lastTimestamp ? Number(lastTimestamp) : 0).toUTCString()
         )
-        .lte('created_at', new Date().toUTCString())
+        .lte('updated_at', new Date().toUTCString())
         .limit(10)
     return NextResponse.json({ data: result.data || [] })
 }
