@@ -65,24 +65,24 @@ export async function POST(request: NextRequest) {
     }
 
     const downloadResult = data as { id: string; output_url: string }
-    // const downloadResponse = await fetch(downloadResult.output_url)
-    // const downloadData = await downloadResponse.blob()
-    //
-    // const cid = await Storage.instance.storeBlob(downloadData)
-    //
-    // const result = await SupaBaseService.instance.from('file').insert({
-    //     cid: cid,
-    //     album_uid: albumUid,
-    //     user_id: userId,
-    //     created_at: new Date(),
-    // })
-    //
-    // if (result.error) {
-    //     return NextResponse.json(
-    //         { message: 'Can not create file' },
-    //         { status: 500 }
-    //     )
-    // }
+    const downloadResponse = await fetch(downloadResult.output_url)
+    const downloadData = await downloadResponse.blob()
 
-    return NextResponse.json({ status: 'success', data: downloadResult })
+    const cid = await Storage.instance.storeBlob(downloadData)
+
+    const result = await SupaBaseService.instance.from('file').insert({
+        cid: cid,
+        album_uid: albumUid,
+        user_id: userId,
+        created_at: new Date(),
+    })
+
+    if (result.error) {
+        return NextResponse.json(
+            { message: 'Can not create file' },
+            { status: 500 }
+        )
+    }
+
+    return NextResponse.json({ status: 'success', cid: cid })
 }
