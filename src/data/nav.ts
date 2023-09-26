@@ -9,7 +9,15 @@ export const pages: Page[] = [
         href: '/',
     },
     {
-        title: 'Login',
-        href: '/login',
+        title: 'Privacy & Policy',
+        href: '/privacy-policy',
     },
+    {
+        title: 'Term & Conditions',
+        href: '/term-and-conditions',
+    },
+    // {
+    //     title: 'Login',
+    //     href: '/login',
+    // },
 ]
