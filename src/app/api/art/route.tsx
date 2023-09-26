@@ -2,9 +2,12 @@ import { NextRequest, NextResponse } from 'next/server'
 import Storage from '@/service/storage'
 import SupaBaseService from '@/service/supabase'
 import { v4 as uuid } from 'uuid'
+type ARTGenerate = {
+    text: string
+}
 export async function POST(request: NextRequest) {
     const userId = request.headers.get('x-user-id')
-    const jsonData = await request.json()
+    const jsonData = (await request.json()) as ARTGenerate
     const text = jsonData.text
     let albumUid = null
 
