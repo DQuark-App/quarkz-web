@@ -9,7 +9,13 @@ class SupaBaseService {
         if (!this._instance) {
             SupaBaseService._instance = createClient<Database>(
                 process.env.SUPABASE_URL || '',
-                process.env.SUPABASE_KEY || ''
+                process.env.SUPABASE_KEY || '',
+                {
+                    auth: {
+                        autoRefreshToken: false,
+                        persistSession: false,
+                    },
+                }
             )
         }
         return this._instance
