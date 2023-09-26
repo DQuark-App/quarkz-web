@@ -5,6 +5,10 @@ import { v4 as uuid } from 'uuid'
 type ARTGenerate = {
     text: string
 }
+export async function GET(request: NextRequest) {
+    return NextResponse.json({ message: 'Art Gen is ready' }, { status: 200 })
+}
+
 export async function POST(request: NextRequest) {
     const userId = request.headers.get('x-user-id')
     const jsonData = (await request.json()) as ARTGenerate
@@ -26,7 +30,7 @@ export async function POST(request: NextRequest) {
             .eq('user_id', userId)
     ).data
 
-    if (checkFolder == null || checkFolder.length === 0) {
+    if (!checkFolder || (checkFolder && checkFolder.length === 0)) {
         albumUid = uuid().toString()
         const result = await SupaBaseService.instance.from('folder').insert({
             uid: albumUid,
