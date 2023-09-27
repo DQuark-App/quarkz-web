@@ -2,8 +2,11 @@ import { NextRequest, NextResponse } from 'next/server'
 import Storage from '@/service/storage'
 import SupaBaseService from '@/service/supabase'
 import { v4 as uuid } from 'uuid'
+import ArtGenerator from '@/service/artgenerator'
 type ARTGenerate = {
     text: string
+    isHD: boolean
+    model: string
 }
 export async function GET(request: NextRequest) {
     return NextResponse.json({ message: 'Art Gen is ready' }, { status: 200 })
@@ -50,21 +53,11 @@ export async function POST(request: NextRequest) {
         albumUid = (checkFolder[0] as { uid: string }).uid
     }
 
-    const params: string[][] = []
-    params.push(['text', text.toString()])
-    params.push(['grid_size', '1'])
-    params.push(['image_generator_version', 'hd'])
-    params.push(['negative_prompt', process.env.NEGATIVE_PROMPT || ''])
-
-    const response = await fetch(process.env.DEEP_AI_API_URL || '', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
-            'api-key': process.env.DEEP_AI_KEY || '',
-        },
-        body: new URLSearchParams(params),
-    })
-
+    const response = await ArtGenerator.instance.generateArt(
+        text,
+        jsonData.model,
+        jsonData.isHD
+    )
     const data = await response.json()
 
     if (data.err) {

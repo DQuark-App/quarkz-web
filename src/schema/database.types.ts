@@ -48,6 +48,14 @@ export interface Database {
                     created_at: Date
                 }
             }
+            model: {
+                Row: {
+                    id: number
+                    name: string
+                    image: string
+                    created_at: Date
+                }
+            }
         }
     }
 }
