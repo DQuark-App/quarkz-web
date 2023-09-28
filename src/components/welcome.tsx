@@ -43,7 +43,7 @@ const Welcome = () => {
                                         fontWeight: 700,
                                     }}
                                 >
-                                    DQuark Center
+                                    Generate , Upload and Mint NFTs
                                     <br />
                                 </Typography>
                             </Box>
@@ -53,9 +53,10 @@ const Welcome = () => {
                                     component="p"
                                     color="text.primary"
                                 >
-                                    Quark is Simple, Secure and Easy to
-                                    Integrate Web 2.0 Service on Solana
-                                    Blockchain. <br />
+                                    Our innovative app allows you to generate
+                                    unique and beautiful art pieces, upload them
+                                    to the IPFS network, and mint them as NFTs
+                                    on the Solana blockchain. <br />
                                 </Typography>
                             </Box>
                             <Box
@@ -75,40 +76,6 @@ const Welcome = () => {
                                 >
                                     Explore
                                 </Box>
-                                <Box
-                                    component={Button}
-                                    color="white"
-                                    size="large"
-                                    fullWidth={!isMd}
-                                    marginTop={{ xs: 1, sm: 0 }}
-                                    marginLeft={{ sm: 2 }}
-                                    startIcon={
-                                        <Box
-                                            component={'svg'}
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            stroke="currentColor"
-                                            width={24}
-                                            height={24}
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth={2}
-                                                d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
-                                            />
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth={2}
-                                                d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                                            />
-                                        </Box>
-                                    }
-                                >
-                                    Watch the video
-                                </Box>
                             </Box>
                         </Box>
                     </Grid>
@@ -127,7 +94,7 @@ const Welcome = () => {
                             >
                                 <Box
                                     component={'img'}
-                                    src={'/home.png'}
+                                    src={'/dquark-home.png'}
                                     width={1}
                                     height={1}
                                     sx={{
