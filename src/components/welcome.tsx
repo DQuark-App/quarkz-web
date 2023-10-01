@@ -8,6 +8,7 @@ import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 import Container from './container'
+import Image from 'next/image'
 
 const Welcome = () => {
     const theme = useTheme()
@@ -67,15 +68,18 @@ const Welcome = () => {
                                     sm: 'flex-start',
                                 }}
                             >
-                                <Box
-                                    component={Button}
-                                    variant="contained"
-                                    color="primary"
-                                    size="large"
-                                    fullWidth={!isMd}
+                                <a
+                                    href={
+                                        'https://play.google.com/store/apps/details?id=com.dquark.quarkz'
+                                    }
                                 >
-                                    Explore
-                                </Box>
+                                    <Image
+                                        src={'/download.png'}
+                                        alt={'download'}
+                                        width={200}
+                                        height={80}
+                                    />
+                                </a>
                             </Box>
                         </Box>
                     </Grid>
